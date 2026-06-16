@@ -10,8 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/css/batang.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<!-- TODO(완성도): Motion CDN에 SRI(integrity) 재적용 — 해시 불일치로 임시 제거 -->
-<script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.18.2/dist/motion.js" integrity="sha384-lFfU+kVPBF9H3h8c1O+KQNuTRX7dilL8RZiy/kxQiYulHvYCHv4z+eba37GD2qTC" crossorigin="anonymous"></script>
 <style>
   :root{
     --canvas:#faf9f5; --surface-soft:#f5f0e8; --surface-card:#efe9de; --surface-cream-strong:#e8e0d2;
@@ -100,29 +99,29 @@
 
     <p class="grp">01 · 김도현</p>
     <ul>
-      <li><a href="#t1-1">금지어가 부른 행동</a></li>
-      <li><a href="#t1-2">규칙 분리 vs 항상 보이기</a></li>
-      <li><a href="#t1-3">규칙은 줄일까 늘릴까</a></li>
+      <li><a href="#t1-1">부정형, 어디까지 바꿀까</a></li>
+      <li><a href="#t1-2">방식 탓일까 조건 탓일까</a></li>
+      <li><a href="#t1-3">줄일까 늘 보이게 둘까</a></li>
     </ul>
 
     <p class="grp">02 · 김찬영</p>
     <ul>
-      <li><a href="#t2-1">점수만 올리는 함정</a></li>
-      <li><a href="#t2-2">목표를 안 주면?</a></li>
-      <li><a href="#t2-3">못 재는 품질 지키기</a></li>
+      <li><a href="#t2-1">UI 훼손, 어떻게 잴까</a></li>
+      <li><a href="#t2-2">목표 덕분일까 우연일까</a></li>
+      <li><a href="#t2-3">나열하면 양립될까</a></li>
     </ul>
 
     <p class="grp">03 · 김시온</p>
     <ul>
-      <li><a href="#t3-1">더러운 코드 따라하기</a></li>
-      <li><a href="#t3-2">콕 집으면 줄까</a></li>
-      <li><a href="#t3-3">자기점검의 한계</a></li>
+      <li><a href="#t3-1">따라한 걸까 반응한 걸까</a></li>
+      <li><a href="#t3-2">효과일까 착시일까</a></li>
+      <li><a href="#t3-3">끝까지 남는 패턴</a></li>
     </ul>
 
     <p class="grp">교차 논제</p>
     <ul>
-      <li><a href="#c1">의도와 다른 신호</a></li>
-      <li><a href="#c2">결과를 믿으려면</a></li>
+      <li><a href="#c1">신호를 미리 알아챌까</a></li>
+      <li><a href="#c2">어디까지 믿을까</a></li>
     </ul>
   </nav>
 
@@ -130,8 +129,8 @@
   <main class="main">
     <header class="hero">
       <p class="kicker">SESSION 1 · 하네스 엔지니어링 스터디</p>
-      <h1>오늘의 발제</h1>
-      <p>글을 다 못 읽고 와도 같이 이야기할 수 있게, 가볍게 던지는 질문들. 더 궁금하면 각 발제의 <b>근거 보기</b>를 펼치세요.</p>
+      <h1>오늘의 논제</h1>
+      <p>각 글이 밝힌 사실에서 한 걸음 더 — 아직 안 풀린 질문으로 토론을 엽니다. 배경 사실이 궁금하면 각 논제의 <b>근거 보기</b>를 펼치세요.</p>
     </header>
 
     <!-- Article 1 -->
@@ -143,29 +142,29 @@
       </div>
 
       <div class="thesis spy" id="t1-1" data-reveal>
-        <p class="q">금지하는 말이 오히려 그 행동을 부른 적 있나요? 어떻게 바꿔 말하면 좋을까요?</p>
+        <p class="q">부정형('하지 마라')이 오히려 금지한 행동을 부른다면, 어떤 규칙은 긍정형으로 바꾸고 어떤 규칙은 그대로 둬야 할까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          <code>Do NOT add comments</code> 지시가 오히려 주석을 유발했다. 부정형이 금지한 행동을 끌어내는 Pink Elephant 효과로 관찰됨.
+          <span class="lbl">아티클이 밝힌 것</span>
+          <code>Do NOT add comments</code> 지시가 오히려 주석을 유발했다(Pink Elephant 효과). 다만 보안 규칙에서는 부정형이 더 신중한 응답을 끌어낸 단일 관찰도 있었다.
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t1-2" data-reveal>
-        <p class="q">규칙을 다른 파일로 빼두면 더 잘 지켜질까, 아니면 안 보고 지나칠까?</p>
+        <p class="q">규칙을 분리했을 때 손해였던 건 분리 방식 자체의 한계일까, 아니면 짧은 비대화형 태스크라는 실험 조건 탓일까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          <code>@import</code> 없이 <code>docs/</code>만 참조하면 파일을 읽지 않아 규칙 준수율이 떨어졌고, 토큰 절감도 없었다 (thin 조건 Task 1이 fat의 4.3배, <code>161,668</code> 토큰).
+          <span class="lbl">아티클이 밝힌 것</span>
+          <code>@import</code> 없이 <code>docs/</code>만 참조하면 파일을 읽지 않아 규칙 준수율이 떨어졌고, 토큰 절감도 없었다 (thin 조건 Task 1이 fat의 4.3배, <code>161,668</code> 토큰). 실험은 <code>claude --print</code> 비대화형·단기 태스크였다.
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t1-3" data-reveal>
-        <p class="q">규칙이 안 지켜질 때 — 규칙을 줄여야 할까, 늘 보이게 둬야 할까?</p>
+        <p class="q">규칙이 안 지켜질 때 진짜 해법은 규칙 수를 줄이는 것일까, 아니면 늘 보이게(항상 로드되는 컨텍스트에) 두는 것일까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          Anthropic은 규칙 수를 줄이라고 권고한다. 반대 선택지로, 항상 로드되는 컨텍스트(큰 CLAUDE.md 또는 <code>@import</code>)에 두는 방법이 있다.
+          <span class="lbl">아티클이 밝힌 것</span>
+          분리는 준수율·토큰 모두 이득이 없었다. Anthropic은 규칙 수 줄이기를 권고하지만, 반대 선택지로 큰 CLAUDE.md나 <code>@import</code>로 항상 로드하는 방법이 있다.
         </div></div></div>
       </div>
     </section>
@@ -179,29 +178,29 @@
       </div>
 
       <div class="thesis spy" id="t2-1" data-reveal>
-        <p class="q">점수 같은 목표를 주면 에이전트가 '점수만' 올리고 정작 중요한 걸 망칠 때가 있을까?</p>
+        <p class="q">점수는 올랐는데 UI가 망가진 걸 '점수만 좇은 탓'으로 단정할 수 있을까? 그리고 UI 훼손은 점수처럼 어떻게 재야 할까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          Lighthouse 95점 이상만 제시하자 <code>99.7</code>점까지 올렸지만 사람이 보기 편한 UI를 망쳤다 (Goodhart's Law 양상).
+          <span class="lbl">아티클이 밝힌 것</span>
+          Lighthouse 95점 이상만 제시하자 <code>99.7</code>점까지 올렸지만 사람이 보기 편한 UI를 망쳤다(Goodhart's Law 양상). UI 훼손 판정은 작성자 1인의 시각 평가였다.
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t2-2" data-reveal>
-        <p class="q">목표를 아예 안 주는 게 더 나은 결과를 낼 때가 있을까? 왜 그럴까?</p>
+        <p class="q">목표를 안 줬을 때 결과가 더 나았던 건 목표 부재 덕분일까, 아니면 점수가 낮아 덜 건드렸을 뿐일까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          점수 목표가 없던 시나리오 C(평균 <code>92</code>점)의 결과물이 오히려 더 나았다.
+          <span class="lbl">아티클이 밝힌 것</span>
+          점수 목표가 없던 시나리오 C는 평균 <code>92</code>점(95점 미달)에 멈췄지만 결과물은 오히려 더 나았다.
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t2-3" data-reveal>
-        <p class="q">'보기 편함'처럼 숫자로 재기 어려운 품질을 에이전트에게 어떻게 지킬까?</p>
+        <p class="q">보존할 것을 충분히 나열하면 점수와 UI를 양립시킬 수 있을까, 아니면 나열하지 못한 부분은 계속 망가질까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          UI 보존 제약을 명시한 시나리오 D는 <code>96.7</code>점에 도달했다.
+          <span class="lbl">아티클이 밝힌 것</span>
+          UI 보존 제약을 명시한 시나리오 D는 <code>96.7</code>점에 도달했다(점수와 UI를 함께 잡은 사례).
         </div></div></div>
       </div>
     </section>
@@ -215,28 +214,28 @@
       </div>
 
       <div class="thesis spy" id="t3-1" data-reveal>
-        <p class="q">주변 코드가 지저분하면 에이전트도 그 나쁜 습관을 따라 할까요?</p>
+        <p class="q">이걸 에이전트가 '나쁜 습관을 따라 한' 거라고 봐야 할까, 아니면 주변 코드의 타입·구조에 단순히 반응한 것뿐일까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          더러운 코드베이스 위에서 새 기능을 시키면 깨끗한 코드베이스보다 안티패턴 재현율이 높아졌다 (<code>6.1%</code>→<code>22.7%</code>).
+          <span class="lbl">아티클이 밝힌 것</span>
+          더러운 코드베이스 위에서 새 기능을 시키면 안티패턴 재현율이 깨끗한 코드베이스보다 높아졌다 (<code>6.1%</code>→<code>22.7%</code>).
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t3-2" data-reveal>
-        <p class="q">'이런 패턴은 쓰지 마'라고 콕 집어 말하면 정말 줄어들까요?</p>
+        <p class="q">콕 집어 지시했을 때 줄어든 건 지시의 효과일까, 아니면 측정 항목과 지시 항목이 겹쳐 생긴 착시(동어반복)일까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
-          콕 집은 사전 지시로 표면적 안티패턴은 줄었으나, 측정 항목과 지시 항목이 겹쳐 효과가 과장됐을 수 있다(동어반복 우려).
+          <span class="lbl">아티클이 밝힌 것</span>
+          콕 집은 사전 지시로 표면적 안티패턴은 줄었다. 그런데 팀 표준이 측정 대상 안티패턴 6종을 그대로 짚고 있었다(측정=지시 겹침).
         </div></div></div>
       </div>
 
       <div class="thesis spy" id="t3-3" data-reveal>
-        <p class="q">작성 뒤 스스로 점검하게 하면 나아질까요? 끝까지 안 고쳐지는 건 뭘까요?</p>
+        <p class="q">자기점검으로도 끝까지 안 고쳐지는 패턴은 무엇이 다를까? 무엇이 '끝까지 남는지'를 가를까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
-          <span class="lbl">아티클 근거</span>
+          <span class="lbl">아티클이 밝힌 것</span>
           작성 후 자기점검은 재현율을 <code>29%</code>→<code>15%</code>로 낮췄지만, 가장 깊이 밴 패턴(디자인 토큰 등)은 <code>100%</code>→<code>100%</code>로 그대로였다.
         </div></div></div>
       </div>
@@ -248,7 +247,7 @@
       <h2>세 실험을 가로지르는 질문</h2>
 
       <div class="thesis spy" id="c1" data-reveal style="background:var(--canvas);">
-        <p class="q">에이전트에 준 신호(목표·금지어·주변 코드)가 의도와 다른 행동을 부르는 공통 패턴이 있을까요? 미리 알아채려면?</p>
+        <p class="q">목표·금지어·주변 코드처럼 에이전트에 준 신호가 의도와 다른 행동을 부른다면, 이런 신호를 미리 알아챌 공통 기준을 만들 수 있을까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
           <span class="lbl">세 글에서</span>
@@ -257,7 +256,7 @@
       </div>
 
       <div class="thesis spy" id="c2" data-reveal style="background:var(--canvas);">
-        <p class="q">이런 실험 결과를 얼마나 믿을 수 있을까요? 무엇이 더 있으면 신뢰가 갈까요?</p>
+        <p class="q">표본·측정·채점이 글마다 제각각인데, 이 결과들을 어디까지 믿고 실무에 적용할 수 있을까? 무엇이 더 있으면 믿을 수 있을까?</p>
         <button class="evidence-toggle" aria-expanded="false"><span class="chev">▶</span> 근거 보기</button>
         <div class="evidence"><div class="evidence-inner"><div class="evidence-body">
           <span class="lbl">세 글에서</span>
@@ -307,16 +306,25 @@
 
     const links = [...document.querySelectorAll('.toc a')];
     const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          links.forEach(a => a.classList.remove('active'));
-          const a = map.get(e.target.id);
-          if (a) a.classList.add('active');
-        }
+    const spies = [...document.querySelectorAll('.spy')];
+    const visible = new Set();
+    const setActive = () => {
+      const mid = window.innerHeight / 2;
+      let best = null, bestDist = Infinity; // 밴드 내에서 화면 중앙에 가장 가까운 섹션
+      spies.forEach(s => {
+        if (!visible.has(s.id)) return;
+        const r = s.getBoundingClientRect();
+        const d = Math.abs((r.top + r.bottom) / 2 - mid);
+        if (d < bestDist) { bestDist = d; best = s; }
       });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    document.querySelectorAll('.spy').forEach(s => obs.observe(s));
+      links.forEach(a => a.classList.remove('active'));
+      if (best) { const a = map.get(best.id); if (a) a.classList.add('active'); }
+    };
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) visible.add(e.target.id); else visible.delete(e.target.id); });
+      setActive();
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    spies.forEach(s => obs.observe(s));
   });
 </script>
 </body>
