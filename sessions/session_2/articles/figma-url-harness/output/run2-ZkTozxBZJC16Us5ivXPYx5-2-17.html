@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Run 2 — CareerMizing : Component Library (공식 Figma MCP)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-kopubworld@1.0.3/dist/font-kopubworld.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { background: #faf9f5; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; color: #141413; }
+    .gallery-header { padding: 60px 40px 40px; border-bottom: 1px solid #e8e0d2; }
+    .gallery-kicker { font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: #6c6a64; margin: 0 0 12px; font-family: monospace; }
+    .gallery-title { font-family: 'KoPub Batang', serif; font-size: 40px; font-weight: 700; letter-spacing: -0.4px; margin: 0 0 8px; }
+    .gallery-meta { font-size: 13px; color: #6c6a64; margin: 0 0 4px; }
+    .gallery-run-badge { display: inline-block; font-size: 11px; font-family: monospace; background: #191d20; color: #faf9f5; padding: 3px 8px; border-radius: 4px; margin-top: 8px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 32px; padding: 40px; }
+    .gallery-card { background: #efe9de; border-radius: 12px; overflow: hidden; }
+    .gallery-card-header { padding: 12px 16px 0; display: flex; align-items: center; gap: 8px; }
+    .gallery-card-label { font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: #6c6a64; margin: 0; font-family: monospace; }
+    .gallery-card-badge { font-size: 10px; font-family: monospace; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+    .badge-agent { background: #b5f0d7; color: #219a67; }
+    .badge-fallback { background: #ffd7d7; color: #c0392b; }
+    .gallery-card-body { padding: 16px; overflow: auto; }
+
+    /* ── focus-ring (sub-agent 성공) ── */
+    .frame--focus-ring {
+      --fr-bg-base: #f8f9fa; --fr-bg-card: #ffffff;
+      --fr-tag-bg: #b5f0d7; --fr-tag-fg: #219a67;
+      --fr-fg-primary: #191d20; --fr-fg-tertiary: #5f6870;
+      --fr-border-focused: #0d5df1;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif;
+      display: flex; gap: 32px; align-items: flex-start;
+      padding: 32px; border-radius: 32px; background: var(--fr-bg-base);
+    }
+    .frame--focus-ring * { box-sizing: border-box; }
+    .frame--focus-ring .fr-left { display: flex; flex-direction: column; align-items: flex-start; width: 482px; flex-shrink: 0; }
+    .frame--focus-ring .fr-desc-card { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; width: 100%; min-width: 482px; padding: 40px; border-radius: 24px; background: var(--fr-bg-card); overflow: hidden; }
+    .frame--focus-ring .fr-txt { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; width: 100%; }
+    .frame--focus-ring .fr-tag-group { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; width: 100%; }
+    .frame--focus-ring .fr-tag { display: inline-flex; align-items: center; justify-content: center; padding: 2px 4px; border-radius: 6px; background: var(--fr-tag-bg); }
+    .frame--focus-ring .fr-tag span { font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: -0.1px; color: var(--fr-tag-fg); white-space: nowrap; }
+    .frame--focus-ring .fr-eyebrow { display: flex; gap: 12px; align-items: center; width: 100%; }
+    .frame--focus-ring .fr-eyebrow p { flex: 1 0 0; min-width: 1px; margin: 0; font-weight: 600; font-size: 18px; line-height: 24px; letter-spacing: -0.1px; color: var(--fr-fg-primary); }
+    .frame--focus-ring .fr-title { margin: 0; width: 100%; font-weight: 600; font-size: 40px; line-height: 52px; letter-spacing: -0.4px; color: var(--fr-fg-primary); }
+    .frame--focus-ring .fr-description { margin: 0; width: 100%; font-weight: 400; font-size: 14px; line-height: 20px; letter-spacing: -0.1px; color: var(--fr-fg-tertiary); white-space: pre-wrap; }
+    .frame--focus-ring .fr-right { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; justify-content: center; width: 600px; flex-shrink: 0; padding: 40px 48px 48px; border-radius: 24px; background: var(--fr-bg-card); }
+    .frame--focus-ring .fr-set-title { margin: 0; min-width: 100%; font-weight: 600; font-size: 28px; line-height: 40px; letter-spacing: -0.2px; color: var(--fr-fg-primary); }
+    .frame--focus-ring .fr-ring { width: 223px; height: 51px; flex-shrink: 0; border: 2px solid var(--fr-border-focused); }
+
+    /* ── aspect-ratio (main-agent fallback) ── */
+    .frame--aspect-ratio, .frame--aspect-ratio * { box-sizing: border-box; }
+    .frame--aspect-ratio {
+      display: flex; flex-direction: row; align-items: flex-start;
+      gap: 32px; padding: 32px; background: #F8F9FA; border-radius: 32px;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif; width: fit-content;
+    }
+    .frame--aspect-ratio .ar-left { display: flex; flex-direction: column; align-items: flex-start; width: 482px; flex-shrink: 0; }
+    .frame--aspect-ratio .ar-desc-card { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; width: 100%; min-width: 482px; padding: 40px; background: white; border-radius: 24px; overflow: hidden; }
+    .frame--aspect-ratio .ar-txt { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .frame--aspect-ratio .ar-tag-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .frame--aspect-ratio .ar-tag { display: inline-flex; align-items: center; justify-content: center; padding: 2px 4px; border-radius: 6px; background: #C6ECFF; }
+    .frame--aspect-ratio .ar-tag span { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -0.1px; color: #089FEA; white-space: nowrap; }
+    .frame--aspect-ratio .ar-eyebrow { display: flex; gap: 12px; align-items: center; width: 100%; }
+    .frame--aspect-ratio .ar-group-name { flex: 1 0 0; min-width: 1px; margin: 0; font-weight: 600; font-size: 18px; line-height: 24px; letter-spacing: -0.1px; color: #191D20; }
+    .frame--aspect-ratio .ar-title { margin: 0; width: 100%; font-weight: 600; font-size: 40px; line-height: 52px; letter-spacing: -0.4px; color: #191D20; }
+    .frame--aspect-ratio .ar-desc { margin: 0; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: -0.1px; color: #5F6870; white-space: pre-wrap; }
+    .frame--aspect-ratio .ar-right { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; padding: 40px 48px 48px; background: white; border-radius: 24px; flex-shrink: 0; }
+    .frame--aspect-ratio .ar-set-title { margin: 0; font-weight: 600; font-size: 28px; line-height: 40px; letter-spacing: -0.2px; color: #191D20; }
+    .frame--aspect-ratio .ar-canvas { position: relative; width: 1248px; height: 740px; flex-shrink: 0; }
+    .frame--aspect-ratio .ar-label-row { position: absolute; left: 116px; top: 0; display: flex; flex-direction: row; align-items: center; gap: 48px; padding: 0 20px; width: 1132px; }
+    .frame--aspect-ratio .ar-label { display: flex; flex-direction: column; align-items: center; height: 32px; justify-content: center; }
+    .frame--aspect-ratio .ar-purple { font-size: 14px; font-weight: 500; line-height: 20px; color: #9747FF; white-space: nowrap; }
+    .frame--aspect-ratio .ar-grid { position: absolute; left: 116px; top: 32px; width: 1132px; height: 708px; }
+    .frame--aspect-ratio .ar-box { position: absolute; background: #F1F3F5; }
+    .frame--aspect-ratio .ar-label-col { position: absolute; left: 0; top: 32px; display: flex; flex-direction: column; gap: 308px; padding: 20px 0; width: 116px; height: 708px; }
+    .frame--aspect-ratio .ar-row-label { display: flex; align-items: center; }
+
+    /* ── slot (main-agent fallback) ── */
+    .frame--slot, .frame--slot * { box-sizing: border-box; }
+    .frame--slot {
+      display: flex; flex-direction: row; align-items: flex-start;
+      gap: 32px; padding: 32px; background: #F8F9FA; border-radius: 32px;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif; width: fit-content;
+    }
+    .frame--slot .sl-left { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; width: 482px; flex-shrink: 0; }
+    .frame--slot .sl-desc-card { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; width: 100%; min-width: 482px; padding: 40px; background: white; border-radius: 24px; overflow: hidden; }
+    .frame--slot .sl-txt { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .frame--slot .sl-tag-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .frame--slot .sl-tag { display: inline-flex; align-items: center; justify-content: center; padding: 2px 4px; border-radius: 6px; background: #B5F0D7; }
+    .frame--slot .sl-tag span { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -0.1px; color: #219A67; white-space: nowrap; }
+    .frame--slot .sl-eyebrow { display: flex; gap: 12px; align-items: center; width: 100%; }
+    .frame--slot .sl-group-name { flex: 1 0 0; min-width: 1px; margin: 0; font-weight: 600; font-size: 18px; line-height: 24px; letter-spacing: -0.1px; color: #191D20; }
+    .frame--slot .sl-btn { display: flex; align-items: center; justify-content: center; padding: 6px 12px; background: white; border: 1px solid #0D5DF1; border-radius: 8px; flex-shrink: 0; }
+    .frame--slot .sl-btn span { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -0.1px; color: #0D5DF1; white-space: nowrap; }
+    .frame--slot .sl-title { margin: 0; font-weight: 600; font-size: 40px; line-height: 52px; letter-spacing: -0.4px; color: #191D20; }
+    .frame--slot .sl-desc { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: -0.1px; color: #5F6870; }
+    .frame--slot .sl-desc p { margin: 0; }
+    .frame--slot .sl-desc .highlight-blue { color: #1F7FFF; }
+    .frame--slot .sl-desc .highlight-red { color: #CD1F37; }
+    .frame--slot .sl-desc .section-label { font-size: 16px; font-weight: 500; line-height: 24px; color: #5F6870; }
+    .frame--slot .sl-props { display: flex; flex-direction: column; gap: 24px; padding: 0 40px; }
+    .frame--slot .sl-prop-section { display: flex; flex-direction: column; gap: 16px; }
+    .frame--slot .sl-prop-title { margin: 0; font-weight: 600; font-size: 16px; line-height: 24px; letter-spacing: -0.1px; color: #282F37; }
+    .frame--slot .sl-prop-item { display: flex; align-items: center; gap: 8px; }
+    .frame--slot .sl-prop-emoji { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #C6ECFF; border-radius: 6px; font-size: 14px; flex-shrink: 0; }
+    .frame--slot .sl-prop-name { font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: -0.1px; color: #282F37; }
+    .frame--slot .sl-prop-values { display: flex; flex-wrap: wrap; gap: 10px; padding-left: 32px; }
+    .frame--slot .sl-prop-value { font-size: 14px; font-weight: 400; line-height: 20px; color: #5F6870; }
+    .frame--slot .sl-right { display: flex; flex-direction: column; align-items: flex-start; gap: 48px; padding: 40px 48px 48px; background: white; border-radius: 24px; flex-shrink: 0; }
+    .frame--slot .sl-set-section { position: relative; width: 506px; height: 416px; }
+    .frame--slot .sl-set-section-label { position: absolute; top: 0; left: 0; font-weight: 600; font-size: 18px; line-height: 24px; letter-spacing: -0.1px; color: #191D20; white-space: nowrap; }
+    .frame--slot .sl-grid { position: absolute; top: 36px; left: 0; width: 506px; height: 380px; }
+    .frame--slot .sl-label-row { position: absolute; top: 0; left: 0; display: flex; align-items: center; gap: 54px; padding: 0 72px; width: 506px; height: 32px; }
+    .frame--slot .sl-col-label { display: flex; align-items: center; justify-content: center; height: 32px; }
+    .frame--slot .sl-purple { font-size: 14px; font-weight: 500; line-height: 20px; color: #9747FF; white-space: nowrap; }
+    .frame--slot .sl-slot-group-v { position: absolute; top: 32px; left: 72px; width: 44px; display: flex; flex-direction: column; gap: 0; }
+    .frame--slot .sl-slot-v { border: 0.5px dashed #11B0FF; height: 44px; width: 44px; }
+    .frame--slot .sl-slot-group-h { position: absolute; top: 130px; left: 170px; display: flex; flex-direction: row; gap: 0; }
+    .frame--slot .sl-slot-h { border: 0.5px dashed #11B0FF; height: 44px; width: 44px; }
+    .frame--slot .sl-set-title { margin: 0; font-weight: 600; font-size: 28px; line-height: 40px; letter-spacing: -0.2px; color: #191D20; }
+    .frame--slot .sl-single-slot { position: relative; width: 46px; height: 85px; }
+    .frame--slot .sl-single-slot-label { position: absolute; top: 0; left: 1px; font-weight: 600; font-size: 18px; line-height: 24px; color: #191D20; white-space: nowrap; }
+    .frame--slot .sl-slot-box { position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 19px)); width: 44px; height: 44px; border: 0.5px dashed #11B0FF; }
+
+    /* ── overlay (main-agent fallback) ── */
+    .frame--overlay, .frame--overlay * { box-sizing: border-box; }
+    .frame--overlay {
+      display: flex; flex-direction: row; align-items: flex-start;
+      gap: 32px; padding: 32px; background: #F8F9FA; border-radius: 32px;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif; width: fit-content;
+    }
+    .frame--overlay .ov-left { display: flex; flex-direction: column; align-items: flex-start; flex-shrink: 0; width: 482px; }
+    .frame--overlay .ov-desc-card { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; min-width: 482px; width: 100%; padding: 40px; background: white; border-radius: 24px; overflow: hidden; flex-shrink: 0; }
+    .frame--overlay .ov-txt { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .frame--overlay .ov-tag-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .frame--overlay .ov-tag { display: inline-flex; align-items: center; justify-content: center; padding: 2px 4px; border-radius: 6px; background: #C6ECFF; }
+    .frame--overlay .ov-tag span { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -0.1px; color: #089FEA; white-space: nowrap; }
+    .frame--overlay .ov-eyebrow { display: flex; gap: 12px; align-items: center; width: 100%; }
+    .frame--overlay .ov-group-name { flex: 1 0 0; min-width: 1px; margin: 0; font-weight: 600; font-size: 18px; line-height: 24px; letter-spacing: -0.1px; color: #191D20; }
+    .frame--overlay .ov-btn { display: flex; align-items: center; justify-content: center; padding: 6px 12px; background: white; border: 1px solid #0D5DF1; border-radius: 8px; flex-shrink: 0; }
+    .frame--overlay .ov-btn span { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -0.1px; color: #0D5DF1; white-space: nowrap; }
+    .frame--overlay .ov-title { margin: 0; font-weight: 600; font-size: 40px; line-height: 52px; letter-spacing: -0.4px; color: #191D20; }
+    .frame--overlay .ov-desc { font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: -0.1px; color: #5F6870; }
+    .frame--overlay .ov-desc p { margin: 0 0 0 0; }
+    .frame--overlay .ov-right { display: flex; flex-direction: column; align-items: flex-start; gap: 48px; padding: 40px 48px 48px; background: white; border-radius: 24px; flex-shrink: 0; justify-content: center; }
+    .frame--overlay .ov-set-title { margin: 0; font-weight: 600; font-size: 28px; line-height: 40px; letter-spacing: -0.2px; color: #191D20; }
+    .frame--overlay .ov-canvas { width: 1920px; height: 1080px; background: rgba(0,0,0,0.5); flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <header class="gallery-header">
+    <p class="gallery-kicker">Figma → HTML 자동 구현 · 공식 Figma MCP</p>
+    <h1 class="gallery-title">CareerMizing : Component Library</h1>
+    <p class="gallery-meta">node-id: 2-17 · 프레임 4개 · ⚙️ Utilites</p>
+    <span class="gallery-run-badge">Run 2 / 3</span>
+  </header>
+
+  <main class="gallery-grid">
+
+    <!-- focus-ring: 서브에이전트 성공 -->
+    <div class="gallery-card">
+      <div class="gallery-card-header">
+        <p class="gallery-card-label">focus-ring</p>
+        <span class="gallery-card-badge badge-agent">sub-agent ✓</span>
+      </div>
+      <div class="gallery-card-body">
+        <div class="frame frame--focus-ring" data-node-id="75:932">
+          <div class="fr-left" data-node-id="75:933">
+            <div class="fr-desc-card" data-node-id="75:934">
+              <div class="fr-txt">
+                <div class="fr-tag-group">
+                  <div class="fr-tag"><span>개발 시작</span></div>
+                  <div class="fr-eyebrow"><p>Utilties</p></div>
+                </div>
+                <p class="fr-title">Focus-Ring</p>
+              </div>
+              <p class="fr-description">키보드·보조기기 사용 시, 현재 입력 대상이 된 요소를 시각적으로 표시하는 강조 표시입니다.
+
+예: 키보드 Tab으로 조작시 나타나는 시각적 강조 표시</p>
+            </div>
+          </div>
+          <div class="fr-right" data-node-id="75:942">
+            <p class="fr-set-title">Component Set : Focus Ring</p>
+            <div class="fr-ring" data-node-id="75:1229"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- aspect-ratio: fallback -->
+    <div class="gallery-card">
+      <div class="gallery-card-header">
+        <p class="gallery-card-label">aspect ratio</p>
+        <span class="gallery-card-badge badge-agent">sub-agent ✓</span>
+      </div>
+      <div class="gallery-card-body">
+        <div class="frame frame--aspect-ratio" data-node-id="222:5573">
+          <div class="ar-left" data-node-id="222:5574">
+            <div class="ar-desc-card" data-node-id="222:5575">
+              <div class="ar-txt">
+                <div class="ar-tag-group">
+                  <div class="ar-tag"><span>디자인 전용</span></div>
+                  <div class="ar-eyebrow">
+                    <p class="ar-group-name">Utilties</p>
+                  </div>
+                </div>
+                <p class="ar-title">aspect ratio</p>
+              </div>
+              <p class="ar-desc">키보드·보조기기 사용 시, 현재 입력 대상이 된 요소를 시각적으로 표시하는 강조 표시입니다.
+
+예: 키보드 Tab으로 조작시 나타나는 시각적 강조 표시</p>
+            </div>
+          </div>
+          <div class="ar-right" data-node-id="222:5576">
+            <p class="ar-set-title">Component Set : Aspect Ratio</p>
+            <div class="ar-canvas" data-node-id="479:8595">
+              <div class="ar-label-row" data-node-id="479:8596">
+                <div class="ar-label" style="width:40px"><span class="ar-purple">1:1</span></div>
+                <div class="ar-label" style="width:100px"><span class="ar-purple">3:2</span></div>
+                <div class="ar-label" style="width:200px"><span class="ar-purple">4:3</span></div>
+                <div class="ar-label" style="width:240px"><span class="ar-purple">5:4</span></div>
+                <div class="ar-label" style="width:320px"><span class="ar-purple">16:9</span></div>
+              </div>
+              <div class="ar-grid" data-node-id="479:8531">
+                <div class="ar-box" style="left:20px;top:20px;width:40px;height:40px"></div>
+                <div class="ar-box" style="left:108px;top:20px;width:100px;height:66.67px"></div>
+                <div class="ar-box" style="left:256px;top:20px;width:200px;height:150px"></div>
+                <div class="ar-box" style="left:504px;top:20px;width:240px;height:192px"></div>
+                <div class="ar-box" style="left:792px;top:20px;width:320px;height:180px"></div>
+                <div class="ar-box" style="left:20px;top:368px;width:40px;height:40px"></div>
+                <div class="ar-box" style="left:108px;top:368px;width:66.67px;height:100px"></div>
+                <div class="ar-box" style="left:256px;top:368px;width:150px;height:200px"></div>
+                <div class="ar-box" style="left:504px;top:368px;width:192px;height:240px"></div>
+                <div class="ar-box" style="left:792px;top:368px;width:180px;height:320px"></div>
+              </div>
+              <div class="ar-label-col" data-node-id="479:8607">
+                <div class="ar-row-label"><span class="ar-purple">portrait-false</span></div>
+                <div class="ar-row-label"><span class="ar-purple">portrait-true</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- slot: fallback -->
+    <div class="gallery-card">
+      <div class="gallery-card-header">
+        <p class="gallery-card-label">slot</p>
+        <span class="gallery-card-badge badge-fallback">fallback</span>
+      </div>
+      <div class="gallery-card-body">
+        <div class="frame frame--slot" data-node-id="238:4304">
+          <div class="sl-left" data-node-id="238:4305">
+            <div class="sl-desc-card" data-node-id="238:4306">
+              <div class="sl-txt">
+                <div class="sl-tag-group">
+                  <div class="sl-tag"><span>개발 시작</span></div>
+                  <div class="sl-eyebrow">
+                    <p class="sl-group-name">Utilties</p>
+                    <div class="sl-btn"><span>Guideline</span></div>
+                  </div>
+                </div>
+                <p class="sl-title">slot</p>
+              </div>
+              <div class="sl-desc">
+                <p><span class="section-label" style="font-size:16px;font-weight:500;line-height:24px;">Slot</span></p>
+                <p>Slot은 컴포넌트의 모양과 동작은 그대로 두고, 겉에 쓰이는 요소만 바꿀 수 있게 해주는 방식입니다. slot의 padding과 gap을 조절하여 다양한 조합의 패턴을 만들 수 있습니다.</p>
+                <p class="highlight-blue">- 현재 slot은 피그마 update 된 버전으로 활용하고 있습니다.</p>
+                <br>
+                <p><span class="section-label" style="font-size:16px;font-weight:500;line-height:24px;">Slot Group</span></p>
+                <p><span class="highlight-red">Slot Group은 gap을 자유롭게 조정할 수 있도록 합니다.</span> 또한 각 component 간격이 일정할 때 쓰입니다.</p>
+              </div>
+            </div>
+            <div class="sl-props" data-node-id="238:4307">
+              <div class="sl-prop-section">
+                <p class="sl-prop-title">slot</p>
+                <div class="sl-prop-item">
+                  <div class="sl-prop-emoji">🎯</div>
+                  <span class="sl-prop-name">swap instance</span>
+                </div>
+              </div>
+              <div class="sl-prop-section">
+                <p class="sl-prop-title">slot group</p>
+                <div class="sl-prop-item">
+                  <div class="sl-prop-emoji">🧭</div>
+                  <span class="sl-prop-name">direction</span>
+                </div>
+                <div class="sl-prop-values">
+                  <span class="sl-prop-value">vertical</span>
+                  <span class="sl-prop-value">horizontal</span>
+                </div>
+                <div class="sl-prop-item">
+                  <div class="sl-prop-emoji">👀</div>
+                  <span class="sl-prop-name">show slot 2~7</span>
+                </div>
+                <div class="sl-prop-values">
+                  <span class="sl-prop-value">true</span>
+                  <span class="sl-prop-value">false</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sl-right" data-node-id="238:4321">
+            <div class="sl-set-section" data-node-id="322:5928">
+              <span class="sl-set-section-label">slot group</span>
+              <div class="sl-grid" data-node-id="322:5907">
+                <div class="sl-label-row" data-node-id="322:5908">
+                  <div class="sl-col-label" style="width:44px"><span class="sl-purple">vertical</span></div>
+                  <div class="sl-col-label" style="width:264px"><span class="sl-purple">horizontal</span></div>
+                </div>
+                <div class="sl-slot-group-v">
+                  <div class="sl-slot-v"></div>
+                  <div class="sl-slot-v"></div>
+                  <div class="sl-slot-v"></div>
+                  <div class="sl-slot-v"></div>
+                  <div class="sl-slot-v"></div>
+                  <div class="sl-slot-v"></div>
+                </div>
+                <div class="sl-slot-group-h">
+                  <div class="sl-slot-h"></div>
+                  <div class="sl-slot-h"></div>
+                  <div class="sl-slot-h"></div>
+                  <div class="sl-slot-h"></div>
+                  <div class="sl-slot-h"></div>
+                  <div class="sl-slot-h"></div>
+                </div>
+              </div>
+            </div>
+            <p class="sl-set-title">Component Set</p>
+            <div class="sl-single-slot" data-node-id="238:4323">
+              <span class="sl-single-slot-label">slot</span>
+              <div class="sl-slot-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- overlay: fallback -->
+    <div class="gallery-card">
+      <div class="gallery-card-header">
+        <p class="gallery-card-label">overlay</p>
+        <span class="gallery-card-badge badge-fallback">fallback</span>
+      </div>
+      <div class="gallery-card-body">
+        <div class="frame frame--overlay" data-node-id="481:8942">
+          <div class="ov-left" data-node-id="481:8943">
+            <div class="ov-desc-card" data-node-id="481:8944">
+              <div class="ov-txt">
+                <div class="ov-tag-group">
+                  <div class="ov-tag"><span>디자인 전용</span></div>
+                  <div class="ov-eyebrow">
+                    <p class="ov-group-name">Utilties</p>
+                    <div class="ov-btn"><span>Guideline</span></div>
+                  </div>
+                </div>
+                <p class="ov-title">Overlay</p>
+              </div>
+              <div class="ov-desc">
+                <p>Overlay 컴포넌트는 화면 위에 반투명 레이어를 덮어 사용자의 주의를 특정 콘텐츠나 인터랙션에 집중시키기 위한 UI 요소입니다.</p>
+                <br>
+                <p>주로 모달, 다이얼로그, 드로어, 팝오버 등 상위 레이어 컴포넌트와 함께 사용되며, 배경 콘텐츠와의 시각적·상호작용적 분리를 담당합니다.</p>
+                <br>
+                <p>크기 조절은 mode를 활용합니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="ov-right" data-node-id="481:8964">
+            <p class="ov-set-title">Component Set</p>
+            <div class="ov-canvas" data-node-id="481:9113"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>
